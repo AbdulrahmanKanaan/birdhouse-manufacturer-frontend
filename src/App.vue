@@ -8,7 +8,9 @@ import TitleBar from './components/TitleBar.vue'
     <TitleBar />
   </header>
 
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style lang="scss" scoped></style>

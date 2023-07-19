@@ -1,0 +1,11 @@
+@use './colors.scss' as c;
+
+* {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: c.$background;
+  color: c.$white;
+}
