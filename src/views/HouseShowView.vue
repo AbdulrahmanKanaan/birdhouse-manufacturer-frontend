@@ -1,24 +1,33 @@
 <script setup lang="ts">
-import HistoryRow from '@/components/HistoryRow.vue'
 import IconText from '@/components/IconText.vue'
 import RadioTabs from '@/components/RadioTabs.vue'
 import LocationIcon from '@/components/icons/LocationIcon.vue'
 import PaginationBar from '@/components/PaginationBar.vue'
-import { reactive } from 'vue'
+import OverviewView from '@/components/history/OverviewView.vue'
+import GraphView from '@/components/history/GraphView.vue'
+import { reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import type { Residency } from '@/types'
 
 const route = useRoute()
 
 const { id } = route.params
 
-const houses = reactive({
-  data: Array.from({ length: 10 }, () => ({
-    id: `house_${Math.random().toString()}`,
+const view = ref('Graph')
+
+function handleViewChange(viewType: string) {
+  view.value = viewType
+}
+
+const history = reactive({
+  data: Array.from({ length: 7 }, () => ({
+    id: Math.floor(Math.random() * 1000000000),
     eggs: Math.floor(Math.random() * 10),
     birds: Math.floor(Math.random() * 10),
     date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString()
-  })),
-  loading: false
+  })) as Residency[],
+  loading: false,
+  page: 1
 })
 </script>
 
@@ -31,17 +40,10 @@ const houses = reactive({
           <LocationIcon />
         </IconText>
       </div>
-      <RadioTabs :tabs="['Overview', 'Graph']" @tab-changed="console.log" />
+      <RadioTabs :tabs="['Overview', 'Graph']" @tab-changed="handleViewChange" :active-tab="view" />
     </div>
-    <div class="history-rows">
-      <HistoryRow
-        v-for="house of houses.data"
-        :key="house.id"
-        :birds="house.birds"
-        :eggs="house.eggs"
-        :date="house.date"
-      />
-    </div>
+    <OverviewView :history="history.data" v-show="view === 'Overview'" />
+    <GraphView :history="history.data" v-show="view === 'Graph'" />
   </div>
   <div class="pagination">
     <PaginationBar />
@@ -75,12 +77,6 @@ $footer-height: 70px;
   }
 
   margin-bottom: 24px;
-}
-
-.history-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 }
 
 .pagination {

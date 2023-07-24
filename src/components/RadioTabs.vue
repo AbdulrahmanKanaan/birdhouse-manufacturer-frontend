@@ -3,7 +3,7 @@
     <div
       v-for="(tab, index) in tabs"
       :key="index"
-      :class="{ active: state.activeTab === index }"
+      :class="{ active: activeTab === tab }"
       @click="changeTab(index)"
     >
       {{ tab }}
@@ -12,23 +12,20 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-
 const props = defineProps({
   tabs: {
     type: Array<String>,
     required: true
+  },
+  activeTab: {
+    type: String,
+    required: true
   }
-})
-
-const state = reactive({
-  activeTab: 0
 })
 
 const emit = defineEmits(['tabChanged'])
 
 function changeTab(index: number) {
-  state.activeTab = index
   emit('tabChanged', props.tabs[index])
 }
 </script>
