@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 function navigateToBirdHouses() {
-  router.push(AppRoutes.birdHouses)
+  router.push(AppRoutes.housesList)
 }
 </script>
 
@@ -23,8 +23,11 @@ function navigateToBirdHouses() {
 </template>
 
 <style scoped lang="scss">
+@use '@/styles/variables.scss' as v;
+@use '@/styles/mixins.scss' as m;
+
 h1 {
-  font-size: 24px;
+  @include m.title-text;
 }
 
 .container {

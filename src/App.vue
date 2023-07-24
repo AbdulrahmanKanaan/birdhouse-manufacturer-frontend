@@ -1,16 +1,30 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+import SideNav from './components/SideNav.vue'
 import TitleBar from './components/TitleBar.vue'
+import { AppRoutes } from './constants'
+
+const route = useRoute()
 </script>
 
 <template>
-  <header>
-    <TitleBar />
-  </header>
+  <TitleBar />
+
+  <SideNav v-show="route.fullPath !== AppRoutes.home" />
 
   <main>
     <RouterView />
   </main>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+@use '@/styles/variables.scss' as v;
+
+main {
+  margin-top: v.$header-height;
+  margin-left: v.$sidebar-width;
+  min-height: calc(100vh - v.$header-height);
+  padding: 16px;
+  box-sizing: border-box;
+}
+</style>

@@ -18,11 +18,13 @@ defineProps({
 
 <style scoped lang="scss">
 @use '@/styles/colors.scss' as c;
+@use '@/styles/variables.scss' as v;
+
 button {
   background-color: c.$primary;
   color: c.$white;
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: v.$border-radius-sm;
   border: none;
   font-size: 16px;
   display: flex;

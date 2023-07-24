@@ -1,0 +1,8 @@
+@use './variables.scss' as v;
+@use './colors.scss' as c;
+
+@mixin title-text {
+  font-size: v.$font-size-title;
+  font-weight: 600;
+  color: c.$white;
+}

@@ -1,5 +1,5 @@
 export default Object.freeze({
   home: '/',
-  birdHouses: '/bird-house',
-  birdHouse: '/bird-house/:id'
+  housesList: '/bird-house',
+  houseShow: '/bird-house/:id'
 } as const)
