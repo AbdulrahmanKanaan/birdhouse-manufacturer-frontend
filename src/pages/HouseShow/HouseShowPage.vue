@@ -1,52 +1,61 @@
 <script setup lang="ts">
 import IconText from '@/components/IconText.vue'
+import PaginationBar from '@/components/PaginationBar.vue'
 import RadioTabs from '@/components/RadioTabs.vue'
 import LocationIcon from '@/components/icons/LocationIcon.vue'
-import PaginationBar from '@/components/PaginationBar.vue'
-import OverviewView from '@/components/history/OverviewView.vue'
-import GraphView from '@/components/history/GraphView.vue'
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import type { Residency } from '@/types'
+import GraphView from './components/GraphView.vue'
+import OverviewView from './components/OverviewView.vue'
+import useHouseStore from './store'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
 
 const { id } = route.params
 
-const view = ref('Graph')
+const view = ref('Overview')
 
 function handleViewChange(viewType: string) {
   view.value = viewType
 }
 
-const history = reactive({
-  data: Array.from({ length: 7 }, () => ({
-    id: Math.floor(Math.random() * 1000000000),
-    eggs: Math.floor(Math.random() * 10),
-    birds: Math.floor(Math.random() * 10),
-    date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString()
-  })) as Residency[],
-  loading: false,
-  page: 1
-})
+const page = ref(1)
+
+const houseStore = useHouseStore()
+
+const { history } = storeToRefs(houseStore)
+
+houseStore.fetchHouse(id as string)
+houseStore.fetchHistory(id as string, page.value)
+
+function handlePageChange(newPage: number) {
+  page.value = newPage
+  houseStore.fetchHistory(id as string, page.value)
+}
 </script>
 
 <template>
   <div class="content">
     <div class="card">
       <div class="header">
-        <span class="title">Cool Birdhouse</span>
-        <IconText text="(7.160850, 16.072736)">
+        <span class="title">{{ houseStore.house?.name }}</span>
+        <IconText :text="`(${houseStore.house?.longitude}, ${houseStore.house?.latitude})`">
           <LocationIcon />
         </IconText>
       </div>
       <RadioTabs :tabs="['Overview', 'Graph']" @tab-changed="handleViewChange" :active-tab="view" />
     </div>
-    <OverviewView :history="history.data" v-show="view === 'Overview'" />
-    <GraphView :history="history.data" v-show="view === 'Graph'" />
+    <OverviewView :history="history" v-show="view === 'Overview'" />
+    <GraphView :history="history" v-show="view === 'Graph'" />
   </div>
   <div class="pagination">
-    <PaginationBar />
+    <PaginationBar
+      @onChange="handlePageChange"
+      :page="page"
+      :totalItems="houseStore.total"
+      :itemsPerPage="7"
+    />
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import HousesListView from '../views/HousesListView.vue'
-import HouseShowView from '../views/HouseShowView.vue'
+import HomePage from '../pages/Home/HomePage.vue'
+import HousesListPage from '../pages/HousesList/HousesListPage.vue'
+import HouseShowPage from '../pages/HouseShow/HouseShowPage.vue'
 import { AppRoutes } from '@/constants'
 
 const router = createRouter({
@@ -10,17 +10,17 @@ const router = createRouter({
     {
       path: AppRoutes.home,
       name: 'home',
-      component: HomeView
+      component: HomePage
     },
     {
       path: AppRoutes.housesList,
       name: 'houses-list',
-      component: HousesListView
+      component: HousesListPage
     },
     {
       path: AppRoutes.houseShow,
       name: 'house-show',
-      component: HouseShowView
+      component: HouseShowPage
     },
     {
       path: '/:path*',

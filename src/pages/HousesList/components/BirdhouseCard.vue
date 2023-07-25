@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import LocationIcon from './icons/LocationIcon.vue'
-import PetIcon from './icons/PetIcon.vue'
-import EggIcon from './icons/EggIcon.vue'
-import IconText from './IconText.vue'
+import LocationIcon from '@/components/icons/LocationIcon.vue'
+import PetIcon from '@/components/icons/PetIcon.vue'
+import EggIcon from '@/components/icons/EggIcon.vue'
+import IconText from '@/components/IconText.vue'
 
 defineProps({
   id: { type: String, required: true },

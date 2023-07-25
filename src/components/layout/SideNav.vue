@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { AppRoutes } from '@/constants'
 import { RouterLink, useRoute } from 'vue-router'
-import GridIcon from './icons/GridIcon.vue'
-import HomeIcon from './icons/HomeIcon.vue'
+import GridIcon from '../icons/GridIcon.vue'
+import HomeIcon from '../icons/HomeIcon.vue'
 const route = useRoute()
 </script>
 

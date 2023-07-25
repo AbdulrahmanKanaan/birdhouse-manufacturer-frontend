@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
-import SideNav from './components/SideNav.vue'
-import TitleBar from './components/TitleBar.vue'
+import SideNav from './components/layout/SideNav.vue'
+import TitleBar from './components/layout/TitleBar.vue'
 import { AppRoutes } from './constants'
 
 const route = useRoute()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import IconText from './IconText.vue'
-import EggIcon from './icons/EggIcon.vue'
-import PetIcon from './icons/PetIcon.vue'
+import IconText from '@/components/IconText.vue'
+import EggIcon from '@/components/icons/EggIcon.vue'
+import PetIcon from '@/components/icons/PetIcon.vue'
 
 defineProps({
   date: {

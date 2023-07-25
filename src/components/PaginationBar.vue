@@ -1,16 +1,36 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
+const emits = defineEmits(['onChange'])
+
+const props = defineProps({
+  page: {
+    type: Number,
+    required: true,
+    default: 1
+  },
+  totalItems: {
+    type: Number,
+    required: true
+  },
+  itemsPerPage: {
+    type: Number,
+    required: true
+  }
+})
+
 const onClickHandler = (page: number) => {
-  console.log(page)
+  currentPage.value = page
+  emits('onChange', page)
 }
 
-const currentPage = ref(1)
+const currentPage = ref(props.page)
 </script>
 
 <template>
   <vue-awesome-paginate
-    :total-items="60"
-    :items-per-page="5"
+    :total-items="totalItems"
+    :items-per-page="itemsPerPage"
     :max-pages-shown="3"
     v-model="currentPage"
     :on-click="onClickHandler"

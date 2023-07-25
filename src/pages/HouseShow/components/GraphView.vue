@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { ApexOptions } from 'apexcharts'
-import type { Residency } from '../../types'
+import type { Residency } from '@/types'
+import useHouseStore from '../store'
+import { computed } from 'vue'
 
 const props = defineProps({
   history: {
@@ -46,7 +48,7 @@ const options: ApexOptions = {
   }
 }
 
-const series: ApexAxisChartSeries = [
+const series = computed<ApexAxisChartSeries>(() => [
   {
     name: 'birds',
     data: props.history.map((residency) => residency.birds),
@@ -57,7 +59,7 @@ const series: ApexAxisChartSeries = [
     data: props.history.map((residency) => residency.eggs),
     color: '#0E9CFF'
   }
-]
+])
 </script>
 
 <template>

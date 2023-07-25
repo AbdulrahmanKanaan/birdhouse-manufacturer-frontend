@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import HistoryRow from '@/components/HistoryRow.vue'
-import type { Residency } from '../../types'
+import HistoryRow from './HistoryRow.vue'
+import type { Residency } from '@/types'
 
 defineProps({
   history: {
