@@ -31,7 +31,7 @@ function handlePageChange(newPage: number) {
       :key="house.id"
       :id="house.id"
       :title="house.name"
-      :location="`(${house.latitude}, ${house.longitude})`"
+      :location="`(${house.longitude}, ${house.latitude})`"
       :birds="house.birds"
       :eggs="house.eggs"
     />
