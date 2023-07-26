@@ -10,6 +10,7 @@ type State = {
   houseLoading: boolean
   error: null | string
   total: number
+  perPage: number
 }
 
 const useHouseStore = defineStore('house', {
@@ -19,7 +20,8 @@ const useHouseStore = defineStore('house', {
     historyLoading: false,
     houseLoading: false,
     error: null,
-    total: 0
+    total: 0,
+    perPage: 7
   }),
   getters: {
     loading: (state) => state.historyLoading || state.houseLoading
@@ -29,7 +31,7 @@ const useHouseStore = defineStore('house', {
       this.historyLoading = true
       try {
         const response = await axios.get(`houses/${id}/history`, {
-          params: { page, perPage: 7 }
+          params: { page, perPage: this.perPage }
         })
         const { data, total } = response.data
         this.history = data
@@ -50,7 +52,7 @@ const useHouseStore = defineStore('house', {
         if (error instanceof AxiosError) this.error = error.message
         console.log(error)
       } finally {
-        this.historyLoading = false
+        this.houseLoading = false
       }
     }
   }

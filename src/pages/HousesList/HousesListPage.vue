@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router'
 import useHousesStore from './store'
 import PaginationBar from '@/components/PaginationBar.vue'
 import { ref } from 'vue'
+import LoadingContainer from '@/components/loading/LoadingContainer.vue'
+import NoData from '@/components/NoData.vue'
 
 const router = useRouter()
 
@@ -24,26 +26,30 @@ function handlePageChange(newPage: number) {
 </script>
 
 <template>
-  <div class="grid">
-    <BirdhouseCard
-      v-for="house of housesStore.houses"
-      @onClick="onCardClick"
-      :key="house.id"
-      :id="house.id"
-      :title="house.name"
-      :location="`(${house.longitude}, ${house.latitude})`"
-      :birds="house.birds"
-      :eggs="house.eggs"
-    />
-  </div>
-  <div class="pagination">
-    <PaginationBar
-      @onChange="handlePageChange"
-      :page="page"
-      :totalItems="housesStore.total"
-      :itemsPerPage="2"
-    />
-  </div>
+  <LoadingContainer :spinning="housesStore.loading">
+    <NoData :items-count="housesStore.houses.length">
+      <div class="grid">
+        <BirdhouseCard
+          v-for="house of housesStore.houses"
+          @onClick="onCardClick"
+          :key="house.id"
+          :id="house.id"
+          :title="house.name"
+          :location="`(${house.longitude}, ${house.latitude})`"
+          :birds="house.birds"
+          :eggs="house.eggs"
+        />
+      </div>
+    </NoData>
+    <div class="pagination">
+      <PaginationBar
+        @onChange="handlePageChange"
+        :page="page"
+        :totalItems="housesStore.total"
+        :itemsPerPage="housesStore.perPage"
+      />
+    </div>
+  </LoadingContainer>
 </template>
 
 <style lang="scss" scoped>

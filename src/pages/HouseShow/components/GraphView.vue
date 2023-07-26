@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type { ApexOptions } from 'apexcharts'
 import type { Residency } from '@/types'
-import useHouseStore from '../store'
+import type { ApexOptions } from 'apexcharts'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -12,7 +11,7 @@ const props = defineProps({
   }
 })
 
-const options: ApexOptions = {
+const options = computed<ApexOptions>(() => ({
   chart: {
     toolbar: {
       show: false
@@ -46,7 +45,7 @@ const options: ApexOptions = {
     size: 5,
     strokeWidth: 0
   }
-}
+}))
 
 const series = computed<ApexAxisChartSeries>(() => [
   {
@@ -65,9 +64,3 @@ const series = computed<ApexAxisChartSeries>(() => [
 <template>
   <apexchart height="600px" type="area" :options="options" :series="series"></apexchart>
 </template>
-
-<style lang="scss">
-.tooltip {
-  background-color: red !important;
-}
-</style>

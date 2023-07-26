@@ -9,6 +9,8 @@ import GraphView from './components/GraphView.vue'
 import OverviewView from './components/OverviewView.vue'
 import useHouseStore from './store'
 import { storeToRefs } from 'pinia'
+import LoadingContainer from '@/components/loading/LoadingContainer.vue'
+import NoData from '@/components/NoData.vue'
 
 const route = useRoute()
 
@@ -36,27 +38,35 @@ function handlePageChange(newPage: number) {
 </script>
 
 <template>
-  <div class="content">
-    <div class="card">
-      <div class="header">
-        <span class="title">{{ houseStore.house?.name }}</span>
-        <IconText :text="`(${houseStore.house?.longitude}, ${houseStore.house?.latitude})`">
-          <LocationIcon />
-        </IconText>
+  <LoadingContainer :spinning="houseStore.loading">
+    <div class="content">
+      <div class="card">
+        <div class="header">
+          <span class="title">{{ houseStore.house?.name }}</span>
+          <IconText :text="`(${houseStore.house?.longitude}, ${houseStore.house?.latitude})`">
+            <LocationIcon />
+          </IconText>
+        </div>
+        <RadioTabs
+          :tabs="['Overview', 'Graph']"
+          @tab-changed="handleViewChange"
+          :active-tab="view"
+        />
       </div>
-      <RadioTabs :tabs="['Overview', 'Graph']" @tab-changed="handleViewChange" :active-tab="view" />
+      <NoData :items-count="history.length">
+        <OverviewView :history="history" v-show="view === 'Overview'" />
+        <GraphView :history="history" v-show="view === 'Graph'" />
+      </NoData>
     </div>
-    <OverviewView :history="history" v-show="view === 'Overview'" />
-    <GraphView :history="history" v-show="view === 'Graph'" />
-  </div>
-  <div class="pagination">
-    <PaginationBar
-      @onChange="handlePageChange"
-      :page="page"
-      :totalItems="houseStore.total"
-      :itemsPerPage="7"
-    />
-  </div>
+    <div class="pagination">
+      <PaginationBar
+        @onChange="handlePageChange"
+        :page="page"
+        :totalItems="houseStore.total"
+        :itemsPerPage="houseStore.perPage"
+      />
+    </div>
+  </LoadingContainer>
 </template>
 
 <style scoped lang="scss">

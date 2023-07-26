@@ -8,6 +8,7 @@ type State = {
   loading: boolean
   error: null | string
   total: number
+  perPage: number
 }
 
 const useHousesStore = defineStore('houses', {
@@ -15,14 +16,15 @@ const useHousesStore = defineStore('houses', {
     houses: [],
     loading: false,
     error: null,
-    total: 0
+    total: 0,
+    perPage: 10
   }),
   actions: {
     async fetchHouses(page: number) {
       this.loading = true
       try {
         const response = await axios.get(`houses`, {
-          params: { page, perPage: 2 }
+          params: { page, perPage: this.perPage }
         })
         const { data, total } = response.data
         this.houses = data
