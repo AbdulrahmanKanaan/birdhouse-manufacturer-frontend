@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../pages/Home/HomePage.vue'
 import HousesListPage from '../pages/HousesList/HousesListPage.vue'
 import HouseShowPage from '../pages/HouseShow/HouseShowPage.vue'
+import NotFoundPage from '../pages/NotFound/NotFoundPage.vue'
 import { AppRoutes } from '@/constants'
 
 const router = createRouter({
@@ -23,8 +24,15 @@ const router = createRouter({
       component: HouseShowPage
     },
     {
+      path: AppRoutes.notFound,
+      name: 'not-found',
+      component: () => NotFoundPage
+    },
+    {
       path: '/:path*',
-      redirect: '/'
+      redirect() {
+        return { path: AppRoutes.notFound, replace: true }
+      }
     }
   ]
 })

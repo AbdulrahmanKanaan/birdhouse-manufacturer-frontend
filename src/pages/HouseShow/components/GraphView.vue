@@ -30,7 +30,19 @@ const options = computed<ApexOptions>(() => ({
     enabled: false
   },
   xaxis: {
-    categories: props.history.map((residency) => residency.date)
+    categories: props.history.map((residency) => residency.date),
+    labels: {
+      style: {
+        colors: '#ffffff99'
+      }
+    }
+  },
+  yaxis: {
+    labels: {
+      style: {
+        colors: '#ffffff99'
+      }
+    }
   },
   grid: {
     strokeDashArray: 1,

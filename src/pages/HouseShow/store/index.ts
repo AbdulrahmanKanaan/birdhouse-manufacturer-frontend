@@ -1,4 +1,6 @@
+import { AppRoutes } from '@/constants'
 import axios from '@/lib/axios'
+import router from '@/router'
 import type { House, Residency } from '@/types'
 import { AxiosError } from 'axios'
 import { defineStore } from 'pinia'
@@ -8,7 +10,6 @@ type State = {
   historyLoading: boolean
   house: House | null
   houseLoading: boolean
-  error: null | string
   total: number
   perPage: number
 }
@@ -19,7 +20,6 @@ const useHouseStore = defineStore('house', {
     house: null,
     historyLoading: false,
     houseLoading: false,
-    error: null,
     total: 0,
     perPage: 7
   }),
@@ -37,8 +37,9 @@ const useHouseStore = defineStore('house', {
         this.history = data
         this.total = total
       } catch (error) {
-        if (error instanceof AxiosError) this.error = error.message
-        console.log(error)
+        if (error instanceof AxiosError) {
+          console.log(error)
+        }
       } finally {
         this.historyLoading = false
       }
@@ -49,8 +50,9 @@ const useHouseStore = defineStore('house', {
         const response = await axios.get(`houses/${id}`)
         this.house = response.data
       } catch (error) {
-        if (error instanceof AxiosError) this.error = error.message
-        console.log(error)
+        if (error instanceof AxiosError && error.response?.status === 404) {
+          router.replace(AppRoutes.notFound)
+        }
       } finally {
         this.houseLoading = false
       }
