@@ -2,6 +2,29 @@
 
 this frontend is an implementation of this [figma design](https://www.figma.com/file/HzHDAngD6aOHxUmxxeNQzF/coding-test?type=design&node-id=0%3A1&mode=dev)
 
+## Installation
+
+Clone the repository
+
+```shell
+git clone https://github.com/AbdulrahmanKanaan/birdhouse-manufacturer-frontend.git
+```
+
+Install the dependencies:
+
+```shell
+cd birdhouse-manufacturer-frontend
+npm install
+```
+
+Update the values of `.env` file as needed.
+
+Start the server
+
+```shell
+npm run dev
+```
+
 ## Thoughts
 
 - the project is 3 different pages with some shared components
