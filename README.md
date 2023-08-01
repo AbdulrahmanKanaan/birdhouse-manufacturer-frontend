@@ -2,6 +2,8 @@
 
 this frontend is an implementation of this [figma design](https://www.figma.com/file/HzHDAngD6aOHxUmxxeNQzF/coding-test?type=design&node-id=0%3A1&mode=dev)
 
+> This project is a backend api for this repo [backend](https://github.com/AbdulrahmanKanaan/birdhouse-manufacturer-backend)
+
 ## Table of contents
 
 - [Birdhouse Manufacturer Frontend](#birdhouse-manufacturer-frontend)
@@ -24,7 +26,7 @@ this frontend is an implementation of this [figma design](https://www.figma.com/
 Clone the repository
 
 ```shell
-git clone https://github.com/AbdulrahmanKanaan/birdhouse-manufacturer-frontend.git
+git clone git@github.com:AbdulrahmanKanaan/birdhouse-manufacturer-frontend.git
 ```
 
 Install the dependencies:
