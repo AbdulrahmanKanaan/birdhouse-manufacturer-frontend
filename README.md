@@ -2,7 +2,7 @@
 
 this frontend is an implementation of this [figma design](https://www.figma.com/file/HzHDAngD6aOHxUmxxeNQzF/coding-test?type=design&node-id=0%3A1&mode=dev)
 
-> This project is a backend api for this repo [backend](https://github.com/AbdulrahmanKanaan/birdhouse-manufacturer-backend)
+> This project is a frontend for this repo [backend](https://github.com/AbdulrahmanKanaan/birdhouse-manufacturer-backend)
 
 ## Table of contents
 
