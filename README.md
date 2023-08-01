@@ -2,6 +2,23 @@
 
 this frontend is an implementation of this [figma design](https://www.figma.com/file/HzHDAngD6aOHxUmxxeNQzF/coding-test?type=design&node-id=0%3A1&mode=dev)
 
+## Table of contents
+
+- [Birdhouse Manufacturer Frontend](#birdhouse-manufacturer-frontend)
+  - [Table of contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Overview](#overview)
+  - [Main Structure](#main-structure)
+    - [Assets](#assets)
+    - [Components](#components)
+    - [Constants](#constants)
+    - [Lib](#lib)
+    - [Pages](#pages)
+    - [Router](#router)
+    - [Styles](#styles)
+    - [Types](#types)
+  - [Conclusion](#conclusion)
+
 ## Installation
 
 Clone the repository
@@ -25,7 +42,7 @@ Start the server
 npm run dev
 ```
 
-## Thoughts
+## Overview
 
 - the project is 3 different pages with some shared components
 - we notice that all pages share the title bar at the top, shared sidebar and footer (except for the home page)
